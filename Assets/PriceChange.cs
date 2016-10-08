@@ -9,11 +9,13 @@ public class PriceChange : MonoBehaviour {
 	void Start () {
         s = GetComponent<Slider>();
         s.onValueChanged.AddListener(delegate { OnValueChenge(); });
+        text.text = s.value.ToString();
+        ss.SetPrice((int)s.value);
     }
     void OnValueChenge()
     {
         text.text = s.value.ToString();
-        ss.SetPrice(s.value);
+        ss.SetPrice((int)s.value);
     }
 	// Update is called once per frame
 	void Update () {

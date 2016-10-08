@@ -7,9 +7,9 @@ public class Traidor : MonoBehaviour {
     public SpriteRenderer HeadSR;
     public SpriteRenderer hendSR;
     public SpriteRenderer FullHand;
-    public float MinP;
-    public float lastprice;
-    public float MaxP;
+    public int MinP;
+    public int lastprice;
+    public int MaxP;
     public int patience;
     public int curpatience =0;
     public delegate void OnPosDlg();
@@ -20,8 +20,8 @@ public class Traidor : MonoBehaviour {
         get { return MinP + (MaxP - MinP); }
     }
     public float Pliability; // 0.0 - 1.0
-    public float Money;
-    public bool Decide(float price,bool ult =false)
+    public int Money;
+    public bool Decide(int price,bool ult =false)
     {
       
         float chance;
@@ -64,7 +64,7 @@ public class Traidor : MonoBehaviour {
         else
             return false;
     }
-    public void NewPrice(float price)
+    public void NewPrice(int price)
     {
         curpatience++;
         if (curpatience >= patience)
@@ -80,10 +80,10 @@ public class Traidor : MonoBehaviour {
         }
         else
         {
-            float newprice;
+            int newprice;
             if (price > MaxP)
             {
-                newprice = MaxP - Random.Range(0f, MinP+((MaxP - MinP) * (1 - Pliability)));
+                newprice =(int) (MaxP - Random.Range(0f, MinP+((MaxP - MinP) * (1 - Pliability))));
                 if (newprice < lastprice)
                     newprice = lastprice;
                 lastprice = newprice;
@@ -92,7 +92,7 @@ public class Traidor : MonoBehaviour {
             }
             else
             {
-                newprice = price - Random.Range(0f, (price-lastprice) * (1 - Pliability));
+                newprice = (int)(price - Random.Range(0f, (price-lastprice) * (1 - Pliability)));
                 if (newprice < lastprice)
                     newprice = lastprice;
                 lastprice = newprice;
@@ -102,7 +102,7 @@ public class Traidor : MonoBehaviour {
             
         }
     }
-    public void TakeUltimatum(float price)
+    public void TakeUltimatum(int price)
     {
         if (Decide(price, true))
         {

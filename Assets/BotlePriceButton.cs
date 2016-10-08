@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class BotlePriceButton : MonoBehaviour {
     /// <summary>
     /// addedline lol
-    /// 
     /// </summary>
     public GameControl gc;
     Text t;

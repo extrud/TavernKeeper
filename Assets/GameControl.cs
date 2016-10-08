@@ -11,7 +11,7 @@ public class GameControl : MonoBehaviour {
     public GameObject CLientPref;
     public int day;
     public int ClientsCount;
-    public float BotlePrice;
+    public int BotlePrice;
     public float ReclamPrice;
     public float PRPrice;
     public float ElitPrice;
@@ -45,7 +45,7 @@ public class GameControl : MonoBehaviour {
         if(TimerC!=null)
         StopCoroutine(TimerC);
         day++;
-        float taxes = Random.Range(3, 8) * day + Random.Range(10, 20);
+        int taxes = Random.Range(3, 8) * day + Random.Range(10, 20);
         Taxes.text = "На уплату налогов ушло" + taxes.ToString();
         ss.money -= taxes;
         if (ss.money < 0)
@@ -118,11 +118,11 @@ public class GameControl : MonoBehaviour {
         t = ((GameObject)Instantiate(CLientPref, new Vector3(16f, 3.9f),CLientPref.transform.rotation)).GetComponent<Traidor>();
         t.Money = Random.Range(10, 70 + day*10);
         t.Pliability = Random.Range(0.1f, 0.9f);
-        t.MinP = t.Money * (1 - t.Pliability) + Random.Range(-20, 20); 
-        t.MaxP = t.Money - t.Money * (1 - t.Pliability) + Random.Range(-20,20);
+        t.MinP =(int) (t.Money * (1 - t.Pliability) + Random.Range(-20, 20)); 
+        t.MaxP = (int)(t.Money - t.Money * (1 - t.Pliability) + Random.Range(-20,20));
         if (t.MaxP > t.Money)
         {
-            t.MaxP = t.Money;
+            t.MaxP = (int)t.Money;
         }
         if (t.MaxP < t.MinP)
         {

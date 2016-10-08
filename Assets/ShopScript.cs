@@ -22,10 +22,10 @@ public class Trade
 {
     ShopScript shop;
     int step;
-    float startPrice;
+    int startPrice;
     Traidor T;
-    float currentPrice;
-   public float LastShopPrice;
+    int currentPrice;
+   public int LastShopPrice;
     public ShopScript Shop
     {
         get
@@ -52,7 +52,7 @@ public class Trade
         }
     }
 
-    public float StartPrice
+    public int StartPrice
     {
         get
         {
@@ -78,7 +78,7 @@ public class Trade
         }
     }
 
-    public float CurrentPrice
+    public int CurrentPrice
     {
         get
         {
@@ -99,30 +99,30 @@ public class Trade
     {
         Shop.TradeDenial();
     }
-    public void SetPrice(float price)
+    public void SetPrice(int price)
     {
         
         currentPrice = price;
         shop.TradeNewPrice(price);
     }
-    public void ShopSetPrice(float price)
+    public void ShopSetPrice(int price)
     {
         LastShopPrice = price;
         currentPrice = price;
         T.NewPrice(price);
     }
-    public void Ultimatum(float price)
+    public void Ultimatum(int price)
     {
         T.TakeUltimatum(price);
     }
 
 }
 public class ShopScript : MonoBehaviour {
-    public float money;
+    public int money;
     public Button[] ActionButtons;
     public delegate void TradeEndDlg();
     public event TradeEndDlg TradeEnd; 
-    public float startprice;
+    public int startprice;
     public int botlecount;
     public Text t;
     public Text t2;
@@ -146,7 +146,7 @@ public class ShopScript : MonoBehaviour {
         botlecount--;
         EndTrade();
     }
-  public  void TradeAcept(float price)
+  public  void TradeAcept(int price)
     {
         t2.text = "Он согласился";
         money += price;
@@ -162,7 +162,7 @@ public class ShopScript : MonoBehaviour {
     {
         t.text ="ВЫ: Нет, давайте "+(CurrentTrade.CurrentPrice + (CurrentTrade.LastShopPrice - CurrentTrade.CurrentPrice) / 2).ToString()+".";
 
-        CurrentTrade.ShopSetPrice(CurrentTrade.CurrentPrice+ (CurrentTrade.LastShopPrice-CurrentTrade.CurrentPrice)/2);
+        CurrentTrade.ShopSetPrice((int)(CurrentTrade.CurrentPrice+ (CurrentTrade.LastShopPrice-CurrentTrade.CurrentPrice)/2));
      }
    public void TradeDenial()
     {
@@ -176,7 +176,7 @@ public class ShopScript : MonoBehaviour {
             b.interactable = false;
         }
     }
-    public void SetPrice(float price)
+    public void SetPrice(int price)
     {
         startprice = price;
     }
