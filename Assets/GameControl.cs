@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class GameControl : MonoBehaviour {
     public Text Time;
+    public Town Town;
     public Text Taxes;
     public RectTransform panEndDay;
     public RectTransform panGameOver;
@@ -22,6 +23,10 @@ public class GameControl : MonoBehaviour {
     Traidor t;
     // Use this for initialization
 	void Start () {
+        Debug.Log("lol");
+        Town = new Town();
+        Town.GenerateTown(new CityGenerateData() {peopleCount=300});
+        Town.ListPersons();
         
         ss.TradeEnd += OnClientEnd;
         NewGame();
